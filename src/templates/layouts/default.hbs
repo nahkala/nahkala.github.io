@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<!--[if lt IE 9]> <html class="no-js lt-ie10 lt-ie9"> <![endif]-->
+<!--[if IE 9]> <html class="no-js lt-ie10"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+{{> header }}
+<body class="page-{{page.basename}}" data-page="{{page.basename}}">
+<div id="page-wrapper">
+	<!--[if lt IE 9]>
+		<p class="outdated alert alert-warning">You are using an <strong>outdated</strong> browser. It has known flaws and will not display this and other websites correctly. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+	{{> headernav }}
+	{{> body }}
+	{{> footernav }}
+</div><!-- /#page-wrapper -->
+{{> footer }}
+</body>
+</html>

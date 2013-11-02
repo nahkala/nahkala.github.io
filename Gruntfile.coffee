@@ -70,7 +70,7 @@ module.exports = (grunt) ->
 
 		cssmin:
 			main:
-				src: ['build/css/main.css']
+				src: ['<%= sass.site.dest %>']
 				dest: 'build/css/main.min.css'
 
 		jshint:
@@ -116,6 +116,7 @@ module.exports = (grunt) ->
 				files: ['src/favicons/**/*.*']
 				tasks: ['favicons']
 			livereload:
+				files: ['<%= copy.css.dest %>']
 				options:
 					livereload: true
 
@@ -139,8 +140,8 @@ module.exports = (grunt) ->
 	grunt.registerTask 'design', ['default', 'watch']
 
 	# Register helper tasks
-	grunt.registerTask 'js', ['jshint', 'concat', 'uglify', 'copy:js']
 	grunt.registerTask 'css', ['sass',  'cssmin', 'copy:css']
+	grunt.registerTask 'favicons', ['copy:favicons']
 	grunt.registerTask 'html', ['assemble']
 	grunt.registerTask 'img', ['copy:img']
-	grunt.registerTask 'favicons', ['copy:favicons']
+	grunt.registerTask 'js', ['jshint', 'concat', 'uglify', 'copy:js']
