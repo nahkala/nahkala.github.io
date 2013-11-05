@@ -5,7 +5,7 @@ module.exports = (grunt) ->
 		
 		assemble:
 			options:
-				assets: 'build/assets'
+				assets: './assets'
 				layoutdir: 'src/templates/layouts'
 				data: ['src/data/**/*.json']
 				partials: ['src/templates/partials/**/*.hbs']
@@ -16,38 +16,38 @@ module.exports = (grunt) ->
 				expand: true
 				cwd: 'src/templates/pages/'
 				src: ['**/*.hbs']
-				dest: 'build/'
+				dest: './'
 
 		copy:
 			js:
 				expand: true
 				cwd: 'src/'
 				src: ['js/vendor/*.*']
-				dest: 'build/'
+				dest: './'
 
 			css: 
 				expand: true
 				cwd: 'src/style/vendor'
 				src: ['**/*']
-				dest: 'build/css/'
+				dest: './css/'
 
 			fonts:
 				expand: true
 				cwd: 'src/'
 				src: ['fonts/**/*']
-				dest: 'build/'
+				dest: './'
 
 			favicons:
 				expand: true
 				cwd: 'src/favicons/'
 				src: ['*']
-				dest: 'build/'
+				dest: './'
 
 			img:
 				expand: true
 				cwd: 'src/'
 				src: ['img/**/*']
-				dest: 'build/'
+				dest: './'
 
 		concat:
 			options:
@@ -55,23 +55,24 @@ module.exports = (grunt) ->
 
 			header:
 				src: ['src/js/polyfills.js', 'src/js/polyfills/**/*.js']
-				dest: 'build/js/header.js'
+				dest: './js/header.min.js'
 
 			components:
 				src: ['src/js/components.js', 'src/js/components/**/*.js']
-				dest: 'build/js/components.js'
+				dest: './js/components.js'
 
 			main:
 				src: ['src/js/main.js', 'src/js/pages/**/*.js']
-				dest: 'build/js/main.js'
+				dest: './js/main.js'
 
 		clean:
-			build: ['build']
+			build: ['*','!src', '!Gruntfile.coffee', '!LICENSE', '!README.md', '!package.json', '!.git', '!.gitmodules', '!.git', '!node_modules']
+			all: ['*','!src', '!Gruntfile.coffee', '!LICENSE', '!README.md', '!package.json', '!.git', '!.gitmodules', '!.git']
 
 		cssmin:
 			main:
 				src: ['<%= sass.site.dest %>']
-				dest: 'build/css/main.min.css'
+				dest: './css/main.min.css'
 
 		jshint:
 			files: ['src/**/*.js', 'test/**/*.js', '!**/vendor/**' , '!**/polyfills/**']
@@ -85,7 +86,7 @@ module.exports = (grunt) ->
 		sass:
 			site:
 				src: 'src/style/main.scss'
-				dest: 'build/css/main.css'
+				dest: './css/main.css'
 
 		uglify:
 			options:
@@ -93,11 +94,11 @@ module.exports = (grunt) ->
 
 			components:
 				src: ['<%= concat.components.dest %>']
-				dest: 'build/js/components.min.js'
+				dest: './js/components.min.js'
 
 			main:
 				src: ['<%= concat.main.dest %>']
-				dest: 'build/js/main.min.js'
+				dest: './js/main.min.js'
 
 		watch:
 			js:
@@ -133,10 +134,10 @@ module.exports = (grunt) ->
 	grunt.loadNpmTasks 'assemble'
 
 	# Register default task (runs when no task is specified)
-	grunt.registerTask 'default', ['clean', 'jshint', 'concat', 'uglify', 'sass',  'cssmin', 'newer:assemble', 'copy']
+	grunt.registerTask 'default', ['clean:build', 'jshint', 'concat', 'uglify', 'sass',  'cssmin', 'newer:assemble', 'copy']
 
 	# Register main tasks
-	grunt.registerTask 'build', ['clean', 'jshint', 'concat', 'uglify', 'sass',  'cssmin', 'assemble', 'copy']
+	grunt.registerTask 'build', ['clean:build', 'jshint', 'concat', 'uglify', 'sass',  'cssmin', 'assemble', 'copy']
 	grunt.registerTask 'design', ['default', 'watch']
 
 	# Register helper tasks
