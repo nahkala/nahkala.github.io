@@ -101,21 +101,18 @@ module.exports = (grunt) ->
 				dest: './js/main.min.js'
 
 		watch:
-			js:
+			script:
 				files: ['<%= jshint.files %>']
-				tasks: ['js']
-			html:
+				tasks: ['script']
+			markup:
 				files: ['src/templates/**/*.hbs']
-				tasks: ['html']
-			css:
+				tasks: ['markup']
+			style:
 				files: ['src/style/**/*.*']
-				tasks: ['css']
-			img:
-				files: ['src/img/**/*.*']
-				tasks: ['img']
-			favicons:
-				files: ['src/favicons/**/*.*']
-				tasks: ['favicons']
+				tasks: ['style']
+			assets:
+				files: ['src/img/**/*.*', 'src/favicons/**/*.*']
+				tasks: ['assets']
 			livereload:
 				files: ['<%= copy.css.dest %>']
 				options:
@@ -141,8 +138,8 @@ module.exports = (grunt) ->
 	grunt.registerTask 'design', ['default', 'watch']
 
 	# Register helper tasks
-	grunt.registerTask 'css', ['sass',  'cssmin', 'copy:css']
-	grunt.registerTask 'favicons', ['copy:favicons']
-	grunt.registerTask 'html', ['assemble']
-	grunt.registerTask 'img', ['copy:img']
-	grunt.registerTask 'js', ['jshint', 'concat', 'uglify', 'copy:js']
+    grunt.registerTask 'assets', ['copy:img', 'copy:favicons', 'copy:fonts']
+	grunt.registerTask 'markup', ['assemble']
+	grunt.registerTask 'script', ['jshint', 'concat', 'uglify', 'copy:js']
+    grunt.registerTask 'style', ['sass',  'cssmin', 'copy:css']
+
