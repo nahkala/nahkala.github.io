@@ -10,8 +10,17 @@ module.exports = (grunt) ->
 				data: ['src/data/**/*.json']
 				partials: ['src/templates/partials/**/*.hbs']
 				layout: 'default.hbs'
-				helpers: ['./src/templates/helpers/**/*.js']
-
+				helpers: ['prettify','./src/templates/helpers/**/*.js']
+				prettify: {
+					brace_style: 'expand',
+					indent_char: '	',
+					indent_scripts: 'normal',
+					preserve_newlines: true,
+					indent: 1,
+					condense: true,
+					padcomments: false,
+					wrap_line_length: 0
+				}
 			site:
 				expand: true
 				cwd: 'src/templates/pages/'
@@ -138,8 +147,8 @@ module.exports = (grunt) ->
 	grunt.registerTask 'design', ['default', 'watch']
 
 	# Register helper tasks
-    grunt.registerTask 'assets', ['copy:img', 'copy:favicons', 'copy:fonts']
+	grunt.registerTask 'assets', ['copy:img', 'copy:favicons', 'copy:fonts']
 	grunt.registerTask 'markup', ['assemble']
 	grunt.registerTask 'script', ['jshint', 'concat', 'uglify', 'copy:js']
-    grunt.registerTask 'style', ['sass',  'cssmin', 'copy:css']
+	grunt.registerTask 'style', ['sass', 'cssmin', 'copy:css']
 

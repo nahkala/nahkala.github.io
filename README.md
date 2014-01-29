@@ -24,7 +24,7 @@ If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out th
 npm install
 ```
 
-Once all plugins has been installed, you may build the project:
+Once all plugins have been installed, you may build the project:
 
 ```shell
 grunt build
@@ -50,7 +50,7 @@ grunt design
 ```
 > runs a `grunt default` and then watches files for changes and builds whatever is needed. Also tries to livereload any css changes. 
 
-There ss also separate tasks for `grunt assets`, `grunt markup`, `grunt script` and `grunt style` that  outputs the latest stuff from `src/`if you would need them.
+There is also separate tasks for `grunt assets`, `grunt markup`, `grunt script` and `grunt style` that  outputs the latest stuff from `src/`if you would need them.
 
 
 Release History
