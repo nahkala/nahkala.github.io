@@ -63,7 +63,7 @@ module.exports = (grunt) ->
 				separator: ';'
 
 			header:
-				src: ['src/js/polyfills.js', 'src/js/polyfills/**/*.js']
+				src: ['src/js/header.js', 'src/js/header/**/*.js']
 				dest: './js/header.min.js'
 
 			components:

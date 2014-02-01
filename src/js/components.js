@@ -1,3 +1,3 @@
 /*
- * All jQuery/helper plugins - Compiled from js/plugins/*.js
+ * All jQuery/helper plugins - Compiled from js/components/*.js
  */

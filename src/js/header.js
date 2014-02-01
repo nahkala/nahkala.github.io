@@ -1,3 +1,3 @@
 /*
- * All polyfills loaded in the header - Compiled from js/polyfills/*.js
+ * All js loaded in the header - Compiled from js/header/*.js
  */
