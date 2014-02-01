@@ -55,4 +55,4 @@ There is also separate tasks for `grunt assets`, `grunt markup`, `grunt script` 
 
 Release History
 ---------------
- * 2014-02-02   v0.1.0	First public release
+ * 2014-XX-XX   v0.1.0	First public release
