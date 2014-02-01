@@ -10,7 +10,7 @@ module.exports = (grunt) ->
 				data: ['src/data/**/*.json']
 				partials: ['src/templates/partials/**/*.hbs']
 				layout: 'default.hbs'
-				helpers: ['prettify','./src/templates/helpers/**/*.js']
+				helpers: ['prettify', './src/templates/helpers/**/*.js']
 				prettify: {
 					brace_style: 'expand',
 					indent_char: '	',
@@ -26,6 +26,14 @@ module.exports = (grunt) ->
 				cwd: 'src/templates/pages/'
 				src: ['**/*.hbs']
 				dest: './'
+
+		autoprefixer:
+			options:
+			    map: true
+			    #browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1']
+			site:
+				src: './css/main.min.css'
+				dest: './css/main.min.css'
 
 		copy:
 			js:
@@ -78,13 +86,8 @@ module.exports = (grunt) ->
 			build: ['*','!src', '!Gruntfile.coffee', '!LICENSE', '!README.md', '!package.json', '!.git', '!.gitmodules', '!.git', '!node_modules']
 			all: ['*','!src', '!Gruntfile.coffee', '!LICENSE', '!README.md', '!package.json', '!.git', '!.gitmodules', '!.git']
 
-		cssmin:
-			main:
-				src: ['<%= sass.site.dest %>']
-				dest: './css/main.min.css'
-
 		jshint:
-			files: ['src/**/*.js', 'test/**/*.js', '!**/vendor/**' , '!**/polyfills/**']
+			files: ['src/**/*.js', 'test/**/*.js', '!**/vendor/**' , '!**/header/**']
 			options:				
 				globals:
 					jQuery: true
@@ -93,9 +96,14 @@ module.exports = (grunt) ->
 					document: true
 
 		sass:
+			options:
+				sourcemap: true
+				trace: true
+				noCache: false
+				style: 'compressed'
 			site:
 				src: 'src/style/main.scss'
-				dest: './css/main.css'
+				dest: './css/main.min.css'
 
 		uglify:
 			options:
@@ -129,27 +137,27 @@ module.exports = (grunt) ->
 					livereload: true
 
 	# Load tasks
-	grunt.loadNpmTasks 'grunt-newer'
 	grunt.loadNpmTasks 'grunt-contrib-clean'
 	grunt.loadNpmTasks 'grunt-contrib-copy'
 	grunt.loadNpmTasks 'grunt-contrib-concat'
-	grunt.loadNpmTasks 'grunt-contrib-cssmin'
 	grunt.loadNpmTasks 'grunt-contrib-jshint'
 	grunt.loadNpmTasks 'grunt-contrib-sass'
 	grunt.loadNpmTasks 'grunt-contrib-uglify'
 	grunt.loadNpmTasks 'grunt-contrib-watch'
+	grunt.loadNpmTasks 'grunt-autoprefixer'
+	grunt.loadNpmTasks 'grunt-newer'
 	grunt.loadNpmTasks 'assemble'
 
 	# Register default task (runs when no task is specified)
-	grunt.registerTask 'default', ['clean:build', 'jshint', 'concat', 'uglify', 'sass',  'cssmin', 'newer:assemble', 'copy']
+	grunt.registerTask 'default', ['clean:build', 'jshint', 'concat', 'uglify', 'sass',  'autoprefixer', 'newer:assemble', 'copy']
 
 	# Register main tasks
-	grunt.registerTask 'build', ['clean:build', 'jshint', 'concat', 'uglify', 'sass',  'cssmin', 'assemble', 'copy']
+	grunt.registerTask 'build', ['clean:build', 'jshint', 'concat', 'uglify', 'sass',  'autoprefixer', 'assemble', 'copy']
 	grunt.registerTask 'design', ['default', 'watch']
 
 	# Register helper tasks
 	grunt.registerTask 'assets', ['copy:img', 'copy:favicons', 'copy:fonts']
 	grunt.registerTask 'markup', ['assemble']
 	grunt.registerTask 'script', ['jshint', 'concat', 'uglify', 'copy:js']
-	grunt.registerTask 'style', ['sass', 'cssmin', 'copy:css']
+	grunt.registerTask 'style', ['sass', 'autoprefixer', 'copy:css']
 
